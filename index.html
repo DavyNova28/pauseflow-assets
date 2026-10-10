@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#596bd0">
+  <meta name="apple-mobile-web-app-title" content="PauseFlow">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>PauseFlow</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/pauseflow-favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/pauseflow-apple-touch-180.png">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <style>
+    :root{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:#263657;background:#f5f7fb}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100svh;display:grid;place-items:center;padding:28px 20px}
+    main{width:min(100%,490px);background:#fff;border:1px solid #e5eaf3;border-radius:24px;box-shadow:0 14px 50px #364d8012;padding:34px 25px;text-align:center}
+    .logo{display:block;width:min(100%,320px);height:auto;margin:0 auto 25px}
+    h1{font-size:25px;margin:0 0 9px;letter-spacing:-.6px}
+    p{font-size:14px;color:#6e7b93;line-height:1.65;margin:0 auto 24px}
+    a.button{display:flex;align-items:center;justify-content:center;min-height:53px;border-radius:12px;background:#596bd0;color:white;font-weight:800;text-decoration:none;padding:14px 18px;box-shadow:0 6px 20px #596bd026}
+    a.button:hover,a.button:focus-visible{background:#485bc5}
+    .setup{font-size:12px;background:#f5f6fb;border-radius:10px;color:#6e7b93;padding:14px;margin-top:16px}
+    .setup[hidden]{display:none}
+  </style>
+</head>
+<body>
+  <main>
+    <img class="logo" src="./assets/pauseflow-header.png" alt="PauseFlow — Pauses de l'équipe">
+    <h1>Horaire des pauses</h1>
+    <p>Consultez les pauses de l’équipe depuis votre téléphone.</p>
+    <a class="button" id="openApp" href="#">Ouvrir PauseFlow →</a>
+    <div id="setupMessage" class="setup" hidden>Configuration requise : insérez votre URL Google Apps Script dans la constante <code>WEBAPP_URL</code> du fichier <code>index.html</code>.</div>
+  </main>
+  <script>
+    // CONFIGURATION — replace only the value below with your existing Apps Script /exec URL.
+    const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbzC7HtidVvRcT-ngZFlhCWtsQmMqH1mU9YBtTVBA5Gdkc59LUHliYNV_5tFUpnhD1iJ/exec';
+    const button = document.getElementById('openApp');
+    const isConfigured = /^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec(?:[?#].*)?$/i.test(WEBAPP_URL);
+    if (isConfigured) {
+      button.href = WEBAPP_URL;
+    } else {
+      button.addEventListener('click', function (event) { event.preventDefault(); });
+      document.getElementById('setupMessage').hidden = false;
+    }
+  </script>
+</body>
+</html>
